@@ -15,6 +15,7 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
 
 - (void)crpushViewController:(UIViewController *)controller animated:(BOOL)animated;
+- (void)crpopRootViewControllerAnimated:(BOOL)animated;
 - (void)crpopViewControllerAnimated:(BOOL)animated;
 
 @end

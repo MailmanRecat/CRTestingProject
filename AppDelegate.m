@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UIColor+CRColor.h"
-#import "CRToolBarViewController.h"
+#import "CRTabBarController.h"
 #import "CRTestingRootViewController.h"
 #import "SunDec13TestingViewController.h"
 
@@ -26,7 +26,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    CRToolBarViewController *CRToolBar = (CRToolBarViewController *)self.window.rootViewController;
+    CRTabBarController *CRTabBar = (CRTabBarController *)self.window.rootViewController;
     
     CRTestingRootViewController *one = ({
         CRTestingRootViewController *one = [CRTestingRootViewController new];
@@ -50,12 +50,17 @@
     });
     
     SunDec13TestingViewController *sunDec13 = [SunDec13TestingViewController new];
+    sunDec13.title = @"sunDec13";
+    
+    FriDec18ViewController *tabFriDec18 = [FriDec18ViewController new];
+    tabFriDec18.title = @"tabFriDec18";
     
     FriDec18ViewController *friDec18 = [FriDec18ViewController new];
     friDec18.title = @"friDec18";
     CRNavigationController *navigation = [[CRNavigationController alloc] initWithRootViewController:friDec18];
+    navigation.title = @"navigation";
     
-    CRToolBar.items = @[ sunDec13, navigation, three ];
+    CRTabBar.items = @[ sunDec13, navigation, three, tabFriDec18 ];
     
     
     [CRTestingFunc runTesting];

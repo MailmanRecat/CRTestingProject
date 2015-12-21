@@ -37,7 +37,7 @@ static NSString *const CR_N_L_POP_Key  = @"CR_NAVIGATION_LEADING_LABEL_POP";
         self.duration = 0.5f;
         self.queue = [[CRQueue alloc] init];
         self.leftEdgeAnchor = 10;
-        self.distance = 30;
+        self.distance = 60;
         
         UILabel *label;
         self.leading = ({
@@ -123,35 +123,30 @@ static NSString *const CR_N_L_POP_Key  = @"CR_NAVIGATION_LEADING_LABEL_POP";
     if( [type isEqualToString:CR_N_L_PUSH_Key] ){
         self.leadingGuide.constant = self.leftEdgeAnchor - self.distance;
     }else{
-        self.trailingGuide.constant = -20;
+        self.trailingGuide.constant = self.leftEdgeAnchor - self.distance;
         [self layoutIfNeeded];
-        self.leadingGuide.constant = 40;
+        self.leadingGuide.constant = self.leftEdgeAnchor + self.distance;
     }
+    
+    self.trailingGuide.constant = 10;
+    
     [UIView animateWithDuration:self.duration * 0.5f
                           delay:0.0f
                         options:( 7 << 16 )
                      animations:^{
                          self.leading.alpha = 0;
+                         self.trailing.alpha = 1;
                          [self layoutIfNeeded];
+                         
                      }completion:^(BOOL f){
                          self.leading.text = title;
-                         self.trailingGuide.constant = 10;
+                         self.leadingGuide.constant = self.leftEdgeAnchor;
+                         self.trailingGuide.constant = self.leftEdgeAnchor + self.distance;
+                         self.leading.alpha = 1;
+                         self.trailing.alpha = 0;
+                         [self layoutIfNeeded];
                          
-                         [UIView animateWithDuration:self.duration * 0.5f
-                                               delay:0.0f
-                                             options:( 7 << 16 )
-                                          animations:^{
-                                              self.trailing.alpha = 1;
-                                              [self layoutIfNeeded];
-                                          }completion:^(BOOL sf){
-                                              self.leadingGuide.constant = self.leftEdgeAnchor;
-                                              self.trailingGuide.constant = self.leftEdgeAnchor + self.distance;
-                                              self.leading.alpha = 1;
-                                              self.trailing.alpha = 0;
-                                              [self layoutIfNeeded];
-
-                                              [self check];
-                                          }];
+                         [self check];
                      }];
 }
 

@@ -73,16 +73,7 @@ static NSString *const CRNavigationControllerSeguePop  = @"CR_NAVIGATION_CONTROL
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     self.counter++;
-    
-//    [self crtransitionToViewController:({
-//        FriDec18ViewController *controller = [[FriDec18ViewController alloc] init];
-//        controller.title = [NSString stringWithFormat:@"friDec18 %ld", self.counter];
-//        controller.view.backgroundColor = [UIColor randomColor];
-//        [self addChildViewController:controller];
-//        [self.crviewControllerStack push:controller];
-//        controller;
-//    })];
-    
+        
     [self crpushViewController:({
         FriDec18ViewController *controller = [[FriDec18ViewController alloc] init];
         controller.title = [NSString stringWithFormat:@"friDec18 %ld", self.level];
@@ -143,7 +134,7 @@ static NSString *const CRNavigationControllerSeguePop  = @"CR_NAVIGATION_CONTROL
         toViewController = (UIViewController *)[self.crviewControllerStack pop];
         
         fromViewController.view.frame = self.view.frame;
-        toViewController.view.frame = CGRectMake(-(self.view.frame.size.width / 2.0f), 0, self.view.frame.size.width, self.view.frame.size.height);
+        toViewController.view.frame = CGRectMake(-(self.view.frame.size.width * 0.3), 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:toViewController.view belowSubview:fromViewController.view];
         
         [self.titleLabel push:CRNavigationLeadingLabelTypePop title:toViewController.title];
@@ -165,7 +156,7 @@ static NSString *const CRNavigationControllerSeguePop  = @"CR_NAVIGATION_CONTROL
                          if( isPush ){
                              fromViewController.view.frame = ({
                                  CGRect frame = self.view.frame;
-                                 frame.origin.x = -(self.view.frame.size.width / 2);
+                                 frame.origin.x = -(self.view.frame.size.width * 0.3);
                                  frame;
                              });
                              toViewController.view.frame = self.view.frame;
