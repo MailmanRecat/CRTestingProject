@@ -11,7 +11,9 @@
 #import "UIColor+CRColor.h"
 #import "CRTransitionAnimationObject.h"
 
+#import "CRTestingFunc.h"
 #import "CRKeyboardTesting.h"
+#import "KMCGeigerCounter.h"
 
 @interface SunDec13TestingViewController()<UITextFieldDelegate>
 
@@ -112,6 +114,11 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     NSLog(@"begin");
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [CRTestingFunc shareTesingFunc].enable = YES;
+    [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
 }
 
 - (void)dismissSelf{

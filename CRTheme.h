@@ -13,4 +13,6 @@
 + (NSDictionary *)themeColors;
 + (UIColor *)themeColorFromString:(NSString *)string;
 
++ (UIColor *)randomColor;
+
 @end

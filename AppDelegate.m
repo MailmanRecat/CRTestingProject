@@ -6,6 +6,8 @@
 //  Copyright © 2015 com.caine. All rights reserved.
 //
 
+#import <Photos/Photos.h>
+
 #import "AppDelegate.h"
 #import "UIColor+CRColor.h"
 #import "CRTabBarController.h"
@@ -14,8 +16,12 @@
 
 #import "CRNavigationController.h"
 #import "FriDec18ViewController.h"
+#import "PHAssetsDomeController.h"
+#import "CRPACKBViewController.h"
 
 #import "CRTestingFunc.h"
+
+#import "KMCGeigerCounter.h"
 
 @interface AppDelegate ()
 
@@ -27,20 +33,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     CRTabBarController *CRTabBar = (CRTabBarController *)self.window.rootViewController;
-    
-    CRTestingRootViewController *one = ({
-        CRTestingRootViewController *one = [CRTestingRootViewController new];
-        one.view.backgroundColor = [UIColor CRColorType:CRColorTypeGoogleMapBlue];
-        one.title = @"first";
-        one;
-    });
-    
-    CRTestingRootViewController *two = ({
-        CRTestingRootViewController *two = [CRTestingRootViewController new];
-        two.view.backgroundColor = [UIColor CRColorType:CRColorTypeGoogleTomato];
-        two.title = @"second";
-        two;
-    });
     
     CRTestingRootViewController *three = ({
         CRTestingRootViewController *three = [CRTestingRootViewController new];
@@ -60,10 +52,17 @@
     CRNavigationController *navigation = [[CRNavigationController alloc] initWithRootViewController:friDec18];
     navigation.title = @"navigation";
     
-    CRTabBar.items = @[ sunDec13, navigation, three, tabFriDec18 ];
+    PHAssetsDomeController *phassets = [[PHAssetsDomeController alloc] init];
+    phassets.title = @"PHAssets";
     
+    CRPACKBViewController *passcode = [[CRPACKBViewController alloc] init];
+    passcode.title = @"passcode";
+    
+    CRTabBar.items = @[ sunDec13, passcode, navigation, three, phassets ];
     
     [CRTestingFunc runTesting];
+    
+//    [CRTestingFunc shareTesingFunc].enable = YES;
     
     return YES;
 }

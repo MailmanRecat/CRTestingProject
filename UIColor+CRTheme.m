@@ -1,20 +1,36 @@
 //
-//  CRTheme.m
-//  CRClassSchedule
+//  UIColor+CRTheme.m
+//  CRNote
 //
-//  Created by caine on 12/18/15.
+//  Created by caine on 12/20/15.
 //  Copyright © 2015 com.caine. All rights reserved.
 //
 
-#import "CRTheme.h"
+#import "UIColor+CRTheme.h"
 
-static NSString *const CRThemeColorDefault = @"default";
+@implementation UIColor (CRTheme)
 
-@implementation CRTheme
++ (NSArray *)themeColorname{
+    return @[
+             CRThemeColorDefault,
+             @"tomato",
+             @"tangerine",
+             @"banana",
+             @"basil",
+             @"sage",
+             @"peacock",
+             @"blueberry",
+             @"lavender",
+             @"grape",
+             @"flamingo",
+             @"graphite",
+             @"black"
+             ];
+}
 
 + (NSDictionary *)themeColors{
     return @{
-             @"default": [UIColor colorWithRed:70 / 255.0 green:136 / 255.0 blue:241 / 255.0 alpha:1],
+             CRThemeColorDefault: [UIColor colorWithRed:70 / 255.0 green:136 / 255.0 blue:241 / 255.0 alpha:1],
              @"tomato": [UIColor colorWithRed:210 / 255.0 green:9 / 255.0 blue:21 / 255.0 alpha:1],
              @"tangerine": [UIColor colorWithRed:240 / 255.0 green:81 / 255.0 blue:43 / 255.0 alpha:1],
              @"banana": [UIColor colorWithRed:244 / 255.0 green:189 / 255.0 blue:58 / 255.0 alpha:1],
@@ -31,8 +47,7 @@ static NSString *const CRThemeColorDefault = @"default";
 }
 
 + (UIColor *)themeColorFromString:(NSString *)string{
-    
-    NSDictionary *colors = [CRTheme themeColors];
+    NSDictionary *colors = [UIColor themeColors];
     
     return ({
         UIColor *color = (UIColor *)colors[[string lowercaseString]];
@@ -45,15 +60,16 @@ static NSString *const CRThemeColorDefault = @"default";
 }
 
 + (UIColor *)randomColor{
-    return [UIColor colorWithRed:[self randomRGB] green:[self randomRGB] blue:[self randomRGB] alpha:1];
+    
+    CGFloat (^randomRGB)(void) = ^{
+        return (arc4random() % 255) / 255.0;
+    };
+    
+    return [UIColor colorWithRed:randomRGB() green:randomRGB() blue:randomRGB() alpha:1];
 }
 
 + (NSUInteger)randomWithrange:(NSUInteger)range{
     return (NSUInteger)(arc4random() % range);
-}
-
-+ (CGFloat)randomRGB{
-    return (arc4random() % 255) / 255.0;
 }
 
 @end

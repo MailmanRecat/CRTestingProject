@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CRTestingFunc : NSObject
 
+@property( nonatomic, assign ) BOOL enable;
+@property( nonatomic, assign ) BOOL running;
+
 + (void)runTesting;
++ (instancetype)shareTesingFunc;
 
 @end
