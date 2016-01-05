@@ -18,6 +18,8 @@
 #import "FriDec18ViewController.h"
 #import "PHAssetsDomeController.h"
 #import "CRPACKBViewController.h"
+#import "WedDec30Alert.h"
+#import "LayoutGuideTestController.h"
 
 #import "CRTestingFunc.h"
 
@@ -58,7 +60,11 @@
     CRPACKBViewController *passcode = [[CRPACKBViewController alloc] init];
     passcode.title = @"passcode";
     
-    CRTabBar.items = @[ sunDec13, passcode, navigation, three, phassets ];
+    WedDec30Alert *alert = [[WedDec30Alert alloc] initFromTitle:@"alert"];
+    
+    LayoutGuideTestController *layoutGuide = [[LayoutGuideTestController alloc] initFromTitle:@"guide"];
+    
+    CRTabBar.items = @[ sunDec13, passcode, navigation, alert, phassets, layoutGuide ];
     
     [CRTestingFunc runTesting];
     

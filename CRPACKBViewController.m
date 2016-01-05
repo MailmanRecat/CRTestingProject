@@ -12,6 +12,8 @@
 #import "CRPACKBViewController.h"
 #import "GoogleToggle.h"
 
+#import "CRVisualTabBar.h"
+
 @interface CRPACKBViewController()
 
 @property( nonatomic, strong ) GoogleInboxLoadingView *loading;
@@ -50,6 +52,32 @@
     self.tog.font = [UIFont MaterialDesignIconsWithSize:15];
     self.tog.enableString = [UIFont mdiEye];
     self.tog.disableString = [UIFont mdiEyeOff];
+    
+    __block UIButton *btn;
+    UIButton *(^letbtn)(NSString *, NSUInteger) = ^(NSString *tit, NSUInteger tag){
+        btn = [[UIButton alloc] init];
+        [btn setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [btn setTag:CR_BISUAL_PEAK_BUTTON_BASIC_TAG + tag];
+        [btn.titleLabel setFont:[UIFont MaterialDesignIconsWithSize:24]];
+        [btn setTitle:tit forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithWhite:249 / 255.0 alpha:1] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithWhite:249 / 255.0 alpha:0.7] forState:UIControlStateHighlighted];
+        [btn setTitleColor:[UIColor colorWithWhite:249 / 255.0 alpha:0.7] forState:UIControlStateDisabled];
+        return btn;
+    };
+    
+    CRVisualTabBar *tabbar = [[CRVisualTabBar alloc] initFromEffectStyle:UIBlurEffectStyleLight];
+    [self.view addSubview:tabbar];
+    [tabbar.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+    [tabbar.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    [tabbar.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-160].active = YES;
+    
+    tabbar.items = @[
+                     letbtn([UIFont mdiAccount], 0),
+                     letbtn([UIFont mdiAccountAlert], 1),
+                     letbtn([UIFont mdiAccountBox], 2)
+                     ];
+    
 }
 
 - (void)togAction{

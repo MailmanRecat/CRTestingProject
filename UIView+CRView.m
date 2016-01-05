@@ -42,4 +42,19 @@
     [(UIButton *)self setTitleColor:color forState:state];
 }
 
+- (void)letShadowWithSize:(CGSize)offset opacity:(CGFloat)opacity radius:(CGFloat)radius{
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOffset = offset;
+    self.layer.shadowOpacity = opacity;
+    self.layer.shadowRadius = radius;
+}
+
+- (void)letShadowWithPath:(CGPathRef)path size:(CGSize)offset opacity:(CGFloat)opacity radius:(CGFloat)radius{
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowPath = path;
+    self.layer.shadowOffset = offset;
+    self.layer.shadowOpacity = opacity;
+    self.layer.shadowRadius = radius;
+}
+
 @end

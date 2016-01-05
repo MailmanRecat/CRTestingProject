@@ -11,9 +11,14 @@
 #import "UIColor+CRColor.h"
 #import "CRTransitionAnimationObject.h"
 
+#import "CRSearchFieldController.h"
 #import "CRTestingFunc.h"
 #import "CRKeyboardTesting.h"
 #import "KMCGeigerCounter.h"
+#import "UIColor+CRTheme.h"
+
+#import "UIBGButton.h"
+#import "CATextLabel.h"
 
 @interface SunDec13TestingViewController()<UITextFieldDelegate>
 
@@ -30,7 +35,15 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor themeColorFromString:CRThemeColorDefault];
+    
+//    UIBGButton *test = [[UIBGButton alloc] init];
+//    test.frame = CGRectMake(0, STATUS_BAR_HEIGHT + 56 + 10, self.view.frame.size.width, 30);
+//    test.titleLabel.textColor = [UIColor blackColor];
+//    test.highlightTextColor = [UIColor colorWithWhite:0 alpha:0.8];
+//    test.highlightColor = [UIColor colorWithWhite:0.8 alpha:1];
+//    test.titleLabel.text = @"FUCK";
+//    [self.view addSubview:test];
     
     self.transitionObject = [CRTransitionAnimationObject defaultCRTransitionAnimation];
     
@@ -42,44 +55,15 @@
         button;
     });
     
-    self.textField = ({
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(8, 20 + 56 + 72, self.view.frame.size.width - 16, 48)];
-        textField.backgroundColor = [UIColor randomColor];
-        textField.delegate = self;
-        [self.view addSubview:textField];
-        textField;
-    });
+    NSString *test = @"The CAAnimation and CALayer classes lets you access the fields of selected data structures using key paths. This feature is a convenient way to specify the field of a data structure that you want to animate. You can also use these conventions in conjunction with the setValue:forKeyPath: and valueForKeyPath: methods to set and get those fields.";
     
-    NSString *testString = @"12adaadasdsadsadasdasdasdasdasdasdasdasddsakf.nrwkgjrnef kjerbvkjdaskdnas,dmasdasasdasds";
-    CGFloat LENMAX = 3000;
-    CGFloat width  = self.view.frame.size.width / 2;
-    CGSize  size   = CGSizeMake(width, LENMAX);
+    CATextLayer *tl = [CATextLabel layerFromRect:CGRectMake(16, 100, self.view.frame.size.width - 32, 56) string:test font:[UIFont fontWithName:@"Roboto-thin" size:12]];
     
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 4, 280, self.view.frame.size.width / 2, 100)];
-    text.numberOfLines = 0;
-    text.backgroundColor = [UIColor randomColor];
+    tl.backgroundColor = [UIColor randomColor].CGColor;
+    [self.view.layer addSublayer:tl];
     
-    text.text = testString;
     
-//    [text sizeToFit];
     
-    [self.view addSubview:text];
-    
-    CGRect stringRect = [testString boundingRectWithSize:size
-                                                 options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:@{
-                                                           NSFontAttributeName: text.font
-                                                           }
-                                                 context:nil];
-    
-    [text sizeThatFits:stringRect.size];
-    
-    void (^logFrame)(CGRect) = ^(CGRect frame){
-        NSLog(@"x: %lf, y: %lf, w: %lf, h: %lf", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
-    };
-    
-//    logFrame( stringRect );
-
 }
 
 - (void)didKeyboardShow{
@@ -124,7 +108,11 @@
 - (void)dismissSelf{
     CRKeyboardTesting *testing = [CRKeyboardTesting new];
     testing.transitioningDelegate = self.transitionObject;
-    [self presentViewController:testing animated:YES completion:nil];
+    
+    CRSearchFieldController *search = [[CRSearchFieldController alloc] init];
+    search.transitioningDelegate = self.transitionObject;
+    
+    [self presentViewController:search animated:YES completion:nil];
 }
 
 @end

@@ -234,4 +234,8 @@ static NSString *const CRNavigationControllerSeguePop  = @"CR_NAVIGATION_CONTROL
     [self.titleLabel.leftAnchor constraintEqualToAnchor:self.park.leftAnchor constant:56].active = YES;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 @end
